@@ -1,4 +1,5 @@
 package oops;
+//Parent class
 class Mi
 {
 	public void miPhonnes()
