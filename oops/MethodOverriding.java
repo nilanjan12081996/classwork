@@ -8,21 +8,21 @@ class ParentBank
 	}
 class Childsbi extends ParentBank
 {
-	public void loanInterest()
+	public void loanInterest()//override the method of parentclass ParentBank
 	{
 		System.out.println("7.75% interest");
 	}
 	}
 class ChildAxis extends ParentBank
 {
-	public void loanInterest()
+	public void loanInterest()//override the method of parentclass ParentBank
 	{
 		System.out.println("9% interest");
 	}
 	}
 class ChildHdfc extends ParentBank
 {
-	public void loanInterest()
+	public void loanInterest()//override the method of parentclass ParentBank
 	{
 		System.out.println("12% interest");
 	}
