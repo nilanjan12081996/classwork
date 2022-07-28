@@ -1,5 +1,5 @@
 package oops;
-//Compiler time polymorphism
+//Compile time polymorphism
 class Addition
 {
 	public void add(int a)
