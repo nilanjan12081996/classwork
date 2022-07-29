@@ -6,6 +6,7 @@ interface Printable
 	void display();//abstract by default
 	void fun();
 	}
+// class print implements the Prinatble interface
 class Print implements Printable
 {
 
@@ -21,6 +22,7 @@ class Print implements Printable
 		System.out.println("Fun learning");
 	}
 	}
+// class Message implements Printable interface
 class Message implements Printable
 {
 
