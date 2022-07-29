@@ -1,17 +1,20 @@
+/*
+@author Nilanjan Dasgupta
+*/
 package abstractiondemo;
-interface GP
+interface GP// parent interface
 {
-	void fun();
+	void fun();	//abstract method by default
 	}
-interface A1 extends GP
+interface A1 extends GP// Child interface A1 extends parent intrface GP
 {
-	void print();
+	void print();	//abstract method by default
 	}
-interface B extends GP
+interface B extends GP// Child interface B extends parent intrface GP
 {
-	void print();
+	void print();	//abstract method by default
 	}
-class Child1 implements A1,B
+class Child1 implements A1,B // class Child1 implements both A1 and B interface
 {
 
 	@Override
