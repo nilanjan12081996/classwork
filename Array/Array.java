@@ -17,7 +17,7 @@ public class Array {
 		}
 		//user input
 		Scanner sc=new Scanner(System.in);
-		int arr2[]=new int[10];//create a array
+		int arr2[]=new int[10];//create a array of size 10
 		System.out.println("enter the number of elements");
 		int n=sc.nextInt();// take users from number of elemenets
 		for(int i =0;i<n;i++)
