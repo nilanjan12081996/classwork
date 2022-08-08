@@ -1,3 +1,6 @@
+/*
+@Author Nilanjan Dasgupta
+*/
 package array;
 
 import java.util.Scanner;
