@@ -1,0 +1,629 @@
+1.To check Databases:
+->show databases
+2.Create database:
+->create database anudip;
+3.To use database:
+-> use database_name;
+4.To Show tables in the database:
+->show tables;
+5.To create table:
+->create table student(student_id INTEGER primary key,student_name varchar(20),student_grade INTEGER,adhaar_no INTEGER);
+6.To check the description of the table:
+->desc student;
+7. to modify table;
+->alter table student rename to Student_details;
+8. to delete col from table:
+->alter table student drop adhaar_no;
+9. rename the column name:
+->alter table student change student_grade student_marks int;
+10.to insert value inside the table 3 ways:
+->i) insert into student(student_id,student_name,student_marks,email)values(101,'Nilanjan Dasgupta',85,'nilanjan0@gmail.com');
+->ii) insert into student values(102,'Randhir Shaw',70,'randhir123@gmail.com');
+->iii) insert into student values(103,'Chandan Maiti',88,'chandan123@gmail.com'),(104,'Shawin Pradhan',89,'shawin007@gmail.com');
+11.to retrive data from database:
+->select * from student;
+12. to retrive particular fields' data:
+->select student_id,student_name from student;
+13.to add more fields in table:
+->alter table student add city varchar(10),add country varchar(10);
+14.update the records:
+-> update student set city='delhi',country='india' where student_id=101;
+15.delete the record:
+->delete from student where student_id=102;
+16.aliasing:(Rename the fields)
+->  select student_id as 's_id',student_name as 's_name'from student;
++------+-------------------+
+| s_id | s_name            |
++------+-------------------+
+|  101 | Nilanjan Dasgupta |
+|  103 | Chandan Maiti     |
+|  104 | Shawin Pradhan    |
++------+-------------------+
+17. to print which citis are there in table:
+->  select distinct(city)from student;
++------------+
+| city       |
++------------+
+| delhi      |
+| kolkata    |
+| darjeeling |
+| mumbai     |
++------------+
+18.count the number of citis in the table:
+->  select count(distinct city)from student;
++----------------------+
+| count(distinct city) |
++----------------------+
+|                    4 |
++----------------------+
+1 row in set (0.08 sec)
+
+mysql> select count(distinct city)as 'number of citis' from student;
++-----------------+
+| number of citis |
++-----------------+
+|               4 |
++-----------------+
+1 row in set (0.00 sec)
+18.to fetch the student details whoes city is kolkata and country is india
+->select * from student where city='kolkata' and country='india';
++------------+---------------+---------------+----------------------+---------+---------+
+| student_id | student_name  | student_marks | email                | city    | country |
++------------+---------------+---------------+----------------------+---------+---------+
+|        103 | Chandan Maiti |            88 | chandan123@gmail.com | kolkata | india   |
+|        105 | Suraj Kumar   |            86 | suraj2415@gmail.com  | kolkata | india   |
+|        107 | Ishika Sharma |            75 | ishika009@gmail.com  | kolkata | india   |
++------------+---------------+---------------+----------------------+---------+---------+
+19. to fetch the student details whoes city is kolkata and marks=75.
+->  select * from student where city='kolkata' or student_marks=75;
++------------+---------------+---------------+----------------------+---------+---------+
+| student_id | student_name  | student_marks | email                | city    | country |
++------------+---------------+---------------+----------------------+---------+---------+
+|        103 | Chandan Maiti |            88 | chandan123@gmail.com | kolkata | india   |
+|        105 | Suraj Kumar   |            86 | suraj2415@gmail.com  | kolkata | india   |
+|        107 | Ishika Sharma |            75 | ishika009@gmail.com  | kolkata | india   |
++------------+---------------+---------------+----------------------+---------+---------+
+20.select those details whose id starts from 104 to 107.
+-> select * from student where student_id>=104 and student_id<=107;
++------------+----------------+---------------+---------------------+------------+---------+
+| student_id | student_name   | student_marks | email               | city       | country |
++------------+----------------+---------------+---------------------+------------+---------+
+|        104 | Shawin Pradhan |            89 | shawin007@gmail.com | darjeeling | india   |
+|        105 | Suraj Kumar    |            86 | suraj2415@gmail.com | kolkata    | india   |
+|        106 | Riya Mondol    |            80 | riya15@gmail.com    | delhi      | india   |
+|        107 | Ishika Sharma  |            75 | ishika009@gmail.com | kolkata    | india   |
++------------+----------------+---------------+---------------------+------------+---------+
+->select * from student where student_id  between 104 and 107;
++------------+----------------+---------------+---------------------+------------+---------+
+| student_id | student_name   | student_marks | email               | city       | country |
++------------+----------------+---------------+---------------------+------------+---------+
+|        104 | Shawin Pradhan |            89 | shawin007@gmail.com | darjeeling | india   |
+|        105 | Suraj Kumar    |            86 | suraj2415@gmail.com | kolkata    | india   |
+|        106 | Riya Mondol    |            80 | riya15@gmail.com    | delhi      | india   |
+|        107 | Ishika Sharma  |            75 | ishika009@gmail.com | kolkata    | india   |
++------------+----------------+---------------+---------------------+------------+---------+
+21.  select * from student where student_marks=80 or student_marks=86 or student_marks=88;
++------------+---------------+---------------+----------------------+---------+---------+
+| student_id | student_name  | student_marks | email                | city    | country |
++------------+---------------+---------------+----------------------+---------+---------+
+|        103 | Chandan Maiti |            88 | chandan123@gmail.com | kolkata | india   |
+|        105 | Suraj Kumar   |            86 | suraj2415@gmail.com  | kolkata | india   |
+|        106 | Riya Mondol   |            80 | riya15@gmail.com     | delhi   | india   |
+|        108 | Chayan Jana   |            80 | chayan15@gmail.com   | mumbai  | india   |
++------------+---------------+---------------+----------------------+---------+---------+
+4 rows in set (0.00 sec)
+
+mysql> select * from student where student_marks in(80,86,88);
++------------+---------------+---------------+----------------------+---------+---------+
+| student_id | student_name  | student_marks | email                | city    | country |
++------------+---------------+---------------+----------------------+---------+---------+
+|        103 | Chandan Maiti |            88 | chandan123@gmail.com | kolkata | india   |
+|        105 | Suraj Kumar   |            86 | suraj2415@gmail.com  | kolkata | india   |
+|        106 | Riya Mondol   |            80 | riya15@gmail.com     | delhi   | india   |
+|        108 | Chayan Jana   |            80 | chayan15@gmail.com   | mumbai  | india   |
++------------+---------------+---------------+----------------------+---------+---------+
+22. to fetch top 4 record:
+-> select * from student limit 4;
++------------+-------------------+---------------+----------------------+------------+---------+
+| student_id | student_name      | student_marks | email                | city       | country |
++------------+-------------------+---------------+----------------------+------------+---------+
+|        101 | Nilanjan Dasgupta |            85 | nilanjan0@gmail.com  | delhi      | india   |
+|        103 | Chandan Maiti     |            88 | chandan123@gmail.com | kolkata    | india   |
+|        104 | Shawin Pradhan    |            89 | shawin007@gmail.com  | darjeeling | india   |
+|        105 | Suraj Kumar       |            86 | suraj2415@gmail.com  | kolkata    | india   |
++------------+-------------------+---------------+----------------------+------------+---------+
+23.sort record in ascending order:
+
+->  select *from student order by student_name;
++------------+-------------------+---------------+----------------------+------------+---------+
+| student_id | student_name      | student_marks | email                | city       | country |
++------------+-------------------+---------------+----------------------+------------+---------+
+|        103 | Chandan Maiti     |            88 | chandan123@gmail.com | kolkata    | india   |
+|        108 | Chayan Jana       |            80 | chayan15@gmail.com   | mumbai     | india   |
+|        107 | Ishika Sharma     |            75 | ishika009@gmail.com  | kolkata    | india   |
+|        101 | Nilanjan Dasgupta |            85 | nilanjan0@gmail.com  | delhi      | india   |
+|        106 | Riya Mondol       |            80 | riya15@gmail.com     | delhi      | india   |
+|        104 | Shawin Pradhan    |            89 | shawin007@gmail.com  | darjeeling | india   |
+|        105 | Suraj Kumar       |            86 | suraj2415@gmail.com  | kolkata    | india   |
++------------+-------------------+---------------+----------------------+------------+---------+
+24. sort record in descending order:
+-> select *from student order by student_name desc;
++------------+-------------------+---------------+----------------------+------------+---------+
+| student_id | student_name      | student_marks | email                | city       | country |
++------------+-------------------+---------------+----------------------+------------+---------+
+|        105 | Suraj Kumar       |            86 | suraj2415@gmail.com  | kolkata    | india   |
+|        104 | Shawin Pradhan    |            89 | shawin007@gmail.com  | darjeeling | india   |
+|        106 | Riya Mondol       |            80 | riya15@gmail.com     | delhi      | india   |
+|        101 | Nilanjan Dasgupta |            85 | nilanjan0@gmail.com  | delhi      | india   |
+|        107 | Ishika Sharma     |            75 | ishika009@gmail.com  | kolkata    | india   |
+|        108 | Chayan Jana       |            80 | chayan15@gmail.com   | mumbai     | india   |
+|        103 | Chandan Maiti     |            88 | chandan123@gmail.com | kolkata    | india   |
++------------+-------------------+---------------+----------------------+------------+---------+
+25. fetch last 4 data:
+->select * from student order by student_id desc limit 4;
++------------+---------------+---------------+---------------------+---------+---------+
+| student_id | student_name  | student_marks | email               | city    | country |
++------------+---------------+---------------+---------------------+---------+---------+
+|        108 | Chayan Jana   |            80 | chayan15@gmail.com  | mumbai  | india   |
+|        107 | Ishika Sharma |            75 | ishika009@gmail.com | kolkata | india   |
+|        106 | Riya Mondol   |            80 | riya15@gmail.com    | delhi   | india   |
+|        105 | Suraj Kumar   |            86 | suraj2415@gmail.com | kolkata | india   |
++------------+---------------+---------------+---------------------+---------+---------+
+26. Like opr : is used in a where clause to search for a specified pattern in a column.
+	there are two wildcards are used in conjuction with like ope:
+		1.% represent zero,one or multiple char.
+		2.(_) represent one,single char.
+27. print student detail whoes name starts with C.
+mysql> select * from student where student_name like 'C%';
++------------+---------------+---------------+----------------------+---------+---------+
+| student_id | student_name  | student_marks | email                | city    | country |
++------------+---------------+---------------+----------------------+---------+---------+
+|        103 | Chandan Maiti |            88 | chandan123@gmail.com | kolkata | india   |
+|        108 | Chayan Jana   |            80 | chayan15@gmail.com   | mumbai  | india   |
++------------+---------------+---------------+----------------------+---------+---------+
+2 rows in set (0.00 sec)
+28.print student detail whoes city's 2nd char is o.
+mysql> select * from student where city like '_o%';
++------------+---------------+---------------+----------------------+---------+---------+
+| student_id | student_name  | student_marks | email                | city    | country |
++------------+---------------+---------------+----------------------+---------+---------+
+|        103 | Chandan Maiti |            88 | chandan123@gmail.com | kolkata | india   |
+|        105 | Suraj Kumar   |            86 | suraj2415@gmail.com  | kolkata | india   |
+|        107 | Ishika Sharma |            75 | ishika009@gmail.com  | kolkata | india   |
++------------+---------------+---------------+----------------------+---------+---------+
+3 rows in set (0.00 sec)
+29. select student details where there is rj in their city.
+mysql> select * from student where city like '%rj%';
++------------+----------------+---------------+---------------------+------------+---------+
+| student_id | student_name   | student_marks | email               | city       | country |
++------------+----------------+---------------+---------------------+------------+---------+
+|        104 | Shawin Pradhan |            89 | shawin007@gmail.com | darjeeling | india   |
++------------+----------------+---------------+---------------------+------------+---------+
+1 row in set (0.00 sec)
+30.sencond last char is a.
+mysql> select * from student where student_name like '%a_';
++------------+----------------+---------------+---------------------+------------+---------+
+| student_id | student_name   | student_marks | email               | city       | country |
++------------+----------------+---------------+---------------------+------------+---------+
+|        104 | Shawin Pradhan |            89 | shawin007@gmail.com | darjeeling | india   |
+|        105 | Suraj Kumar    |            86 | suraj2415@gmail.com | kolkata    | india   |
++------------+----------------+---------------+---------------------+------------+---------+
+2 rows in set (0.00 sec)
+31. select student details whoes name satr with S and atleat lenght of 3:
+
+mysql> select * from student where student_name like 'S__%';
++------------+----------------+---------------+---------------------+------------+---------+
+| student_id | student_name   | student_marks | email               | city       | country |
++------------+----------------+---------------+---------------------+------------+---------+
+|        104 | Shawin Pradhan |            89 | shawin007@gmail.com | darjeeling | india   |
+|        105 | Suraj Kumar    |            86 | suraj2415@gmail.com | kolkata    | india   |
++------------+----------------+---------------+---------------------+------------+---------+
+2 rows in set (0.00 sec)
+
+32.fetch those stuent details who have C as 1st char and a as last char in their name.
+
+
+mysql> select * from student where student_name like 'C%a';
++------------+--------------+---------------+--------------------+--------+---------+
+| student_id | student_name | student_marks | email              | city   | country |
++------------+--------------+---------------+--------------------+--------+---------+
+|        108 | Chayan Jana  |            80 | chayan15@gmail.com | mumbai | india   |
++------------+--------------+---------------+--------------------+--------+---------+
+1 row in set (0.00 sec)
+33.calculate total marks:
+mysql> select sum(student_marks)as 'total_marks' from student;
++-------------+
+| total_marks |
++-------------+
+|         583 |
++-------------+
+1 row in set (0.00 sec)
+34.count no of student:
+ mysql> select count(*) as 'no of students'from student;
++----------------+
+| no of students |
++----------------+
+|              7 |
++----------------+
+1 row in set (0.07 sec)
+35.select those student details who have minimum marks.
+mysql> select min(student_marks)from student;
++--------------------+
+| min(student_marks) |
++--------------------+
+|                 75 |
++--------------------+
+1 row in set (0.13 sec)
+36.select those student details who have maximum marks.
+mysql> select max(student_marks)from student;
++--------------------+
+| max(student_marks) |
++--------------------+
+|                 89 |
++--------------------+
+1 row in set (0.00 sec)
+37.select the student name who has less marks.
+mysql> select student_name from student where student_marks=(select min(student_marks) from student);
++---------------+
+| student_name  |
++---------------+
+| Ishika Sharma |
++---------------+
+1 row in set (0.00 sec)
+38.select the student name who has more marks.
+mysql> select student_name from student where student_marks=(select max(student_marks) from student);
++----------------+
+| student_name   |
++----------------+
+| Shawin Pradhan |
++----------------+
+1 row in set (0.00 sec)
+				or
+mysql> select student_name from student where student_marks in(select max(student_marks) from student);
++----------------+
+| student_name   |
++----------------+
+| Shawin Pradhan |
++----------------+
+1 row in set (0.10 sec)
+39. find the number of stuents in each city.
+mysql> select count(*),city from student group by city;
++----------+------------+
+| count(*) | city       |
++----------+------------+
+|        2 | delhi      |
+|        3 | kolkata    |
+|        1 | darjeeling |
+|        1 | mumbai     |
++----------+------------+
+4 rows in set (0.06 sec)
+			OR
+mysql> select count(student_id),city from student group by city;
++-------------------+------------+
+| count(student_id) | city       |
++-------------------+------------+
+|                 2 | delhi      |
+|                 3 | kolkata    |
+|                 1 | darjeeling |
+|                 1 | mumbai     |
++-------------------+------------+
+4 rows in set (0.00 sec)
+40.find the number of stuents in each city in sorted order.
+mysql> select count(student_id),city from student group by city order by count(student_id);
++-------------------+------------+
+| count(student_id) | city       |
++-------------------+------------+
+|                 1 | darjeeling |
+|                 1 | mumbai     |
+|                 2 | delhi      |
+|                 3 | kolkata    |
++-------------------+------------+
+4 rows in set (0.00 sec)
+
+41.Having clause is used instead of where clause with aggregate function.
+find the city where no of student greater than 2
+mysql> select count(student_id)as 'no of students',city from student group by city having count(*)>2;
++----------------+---------+
+| no of students | city    |
++----------------+---------+
+|              3 | kolkata |
++----------------+---------+
+1 row in set (0.00 sec)
+
+creation of foreign key in mysql:
+
+mysql> create table course(cid int primary key auto_increment,cname varchar(30)not null, duration varchar(50),sid int,foreign key(sid) references student(student_id));
+Query OK, 0 rows affected (0.75 sec)
+mysql> desc course;
++----------+-------------+------+-----+---------+----------------+
+| Field    | Type        | Null | Key | Default | Extra          |
++----------+-------------+------+-----+---------+----------------+
+| cid      | int         | NO   | PRI | NULL    | auto_increment |
+| cname    | varchar(30) | NO   |     | NULL    |                |
+| duration | varchar(50) | YES  |     | NULL    |                |
+| sid      | int         | YES  | MUL | NULL    |                |
++----------+-------------+------+-----+---------+----------------+
+4 rows in set (0.23 sec)
+
+mysql> insert into course(cname,duration,sid)values('java full stack','4 months',101);
+Query OK, 1 row affected (0.09 sec)
+
+mysql> insert into course(cname,duration,sid)values('java full stack','4 months',104);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into course(cname,duration,sid)values('java full stack','4 months',103);
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into course(cname,duration,sid)values('aws','4 months',105);
+Query OK, 1 row affected (0.09 sec)
+
+mysql> insert into course(cname,duration,sid)values('aws','3 months',106);
+Query OK, 1 row affected (0.17 sec)
+
+mysql> select * from course;
++-----+-----------------+----------+------+
+| cid | cname           | duration | sid  |
++-----+-----------------+----------+------+
+|   1 | java full stack | 4 months |  101 |
+|   2 | java full stack | 4 months |  104 |
+|   3 | java full stack | 4 months |  103 |
+|   4 | aws             | 4 months |  105 |
+|   5 | aws             | 3 months |  106 |
++-----+-----------------+----------+------+
+5 rows in set (0.00 sec)
+
+42.equijoin:
+ select student.student_name,student.city,course.cname,course.duration from student,course where student.student_id=course.sid;
++-------------------+------------+-----------------+----------+
+| student_name      | city       | cname           | duration |
++-------------------+------------+-----------------+----------+
+| Nilanjan Dasgupta | delhi      | java full stack | 4 months |
+| Shawin Pradhan    | darjeeling | java full stack | 4 months |
+| Chandan Maiti     | kolkata    | java full stack | 4 months |
+| Suraj Kumar       | kolkata    | aws             | 4 months |
+| Riya Mondol       | delhi      | aws             | 3 months |
++-------------------+------------+-----------------+----------+
+5 rows in set (0.00 sec)
+
+				or
+using short name:
+mysql> select s.student_name,s.city,c.cname,c.duration from student s,course c where s.student_id=c.sid;
++-------------------+------------+-----------------+----------+
+| student_name      | city       | cname           | duration |
++-------------------+------------+-----------------+----------+
+| Nilanjan Dasgupta | delhi      | java full stack | 4 months |
+| Shawin Pradhan    | darjeeling | java full stack | 4 months |
+| Chandan Maiti     | kolkata    | java full stack | 4 months |
+| Suraj Kumar       | kolkata    | aws             | 4 months |
+| Riya Mondol       | delhi      | aws             | 3 months |
++-------------------+------------+-----------------+----------+
+5 rows in set (0.00 sec)
+
+Inner join:
+mysql> select s.student_name,s.city,c.cname,c.duration from student s inner join course c on s.student_id=c.sid;
++-------------------+------------+-----------------+----------+
+| student_name      | city       | cname           | duration |
++-------------------+------------+-----------------+----------+
+| Nilanjan Dasgupta | delhi      | java full stack | 4 months |
+| Shawin Pradhan    | darjeeling | java full stack | 4 months |
+| Chandan Maiti     | kolkata    | java full stack | 4 months |
+| Suraj Kumar       | kolkata    | aws             | 4 months |
+| Riya Mondol       | delhi      | aws             | 3 months |
++-------------------+------------+-----------------+----------+
+5 rows in set (0.00 sec)
+left outer join:
+mysql> select s.student_name,s.city,c.cname,c.duration from student s left outer join course c on s.student_id=c.sid;
++-------------------+------------+-----------------+----------+
+| student_name      | city       | cname           | duration |
++-------------------+------------+-----------------+----------+
+| Nilanjan Dasgupta | delhi      | java full stack | 4 months |
+| Chandan Maiti     | kolkata    | java full stack | 4 months |
+| Shawin Pradhan    | darjeeling | java full stack | 4 months |
+| Suraj Kumar       | kolkata    | aws             | 4 months |
+| Riya Mondol       | delhi      | aws             | 3 months |
+| Ishika Sharma     | kolkata    | NULL            | NULL     |
+| Chayan Jana       | mumbai     | NULL            | NULL     |
++-------------------+------------+-----------------+----------+
+7 rows in set (0.00 sec)
+right outer join:
+mysql> select s.student_name,s.city,c.cname,c.duration from student s right outer join course c on s.student_id=c.sid;
++-------------------+------------+-----------------+----------+
+| student_name      | city       | cname           | duration |
++-------------------+------------+-----------------+----------+
+| Nilanjan Dasgupta | delhi      | java full stack | 4 months |
+| Shawin Pradhan    | darjeeling | java full stack | 4 months |
+| Chandan Maiti     | kolkata    | java full stack | 4 months |
+| Suraj Kumar       | kolkata    | aws             | 4 months |
+| Riya Mondol       | delhi      | aws             | 3 months |
++-------------------+------------+-----------------+----------+
+
+TCL Command:
+mysql> set autocommit=0;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> start transaction;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select * from course;
++-----+-----------------+----------+------+
+| cid | cname           | duration | sid  |
++-----+-----------------+----------+------+
+|   1 | java full stack | 4 months |  101 |
+|   2 | java full stack | 4 months |  104 |
+|   3 | java full stack | 4 months |  103 |
+|   4 | aws             | 4 months |  105 |
+|   5 | aws             | 3 months |  106 |
++-----+-----------------+----------+------+
+5 rows in set (0.00 sec)
+
+mysql> insert into course(cname,duration,sid)values('dotnet','4 months',107);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> rollback;
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> select * from course;
++-----+-----------------+----------+------+
+| cid | cname           | duration | sid  |
++-----+-----------------+----------+------+
+|   1 | java full stack | 4 months |  101 |
+|   2 | java full stack | 4 months |  104 |
+|   3 | java full stack | 4 months |  103 |
+|   4 | aws             | 4 months |  105 |
+|   5 | aws             | 3 months |  106 |
++-----+-----------------+----------+------+
+5 rows in set (0.00 sec)
+
+mysql> insert into course(cname,duration,sid)values('dotnet','4 months',107);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from course;
++-----+-----------------+----------+------+
+| cid | cname           | duration | sid  |
++-----+-----------------+----------+------+
+|   1 | java full stack | 4 months |  101 |
+|   2 | java full stack | 4 months |  104 |
+|   3 | java full stack | 4 months |  103 |
+|   4 | aws             | 4 months |  105 |
+|   5 | aws             | 3 months |  106 |
+|   7 | dotnet          | 4 months |  107 |
++-----+-----------------+----------+------+
+6 rows in set (0.00 sec)
+
+mysql> rollback;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select * from course;
++-----+-----------------+----------+------+
+| cid | cname           | duration | sid  |
++-----+-----------------+----------+------+
+|   1 | java full stack | 4 months |  101 |
+|   2 | java full stack | 4 months |  104 |
+|   3 | java full stack | 4 months |  103 |
+|   4 | aws             | 4 months |  105 |
+|   5 | aws             | 3 months |  106 |
++-----+-----------------+----------+------+
+5 rows in set (0.00 sec)
+
+mysql> insert into course(cname,duration,sid)values('dotnet','4 months',107);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> commit;
+Query OK, 0 rows affected (0.09 sec)
+
+mysql> rollback;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select* from course;
++-----+-----------------+----------+------+
+| cid | cname           | duration | sid  |
++-----+-----------------+----------+------+
+|   1 | java full stack | 4 months |  101 |
+|   2 | java full stack | 4 months |  104 |
+|   3 | java full stack | 4 months |  103 |
+|   4 | aws             | 4 months |  105 |
+|   5 | aws             | 3 months |  106 |
+|   8 | dotnet          | 4 months |  107 |
++-----+-----------------+----------+------+
+6 rows in set (0.00 sec)
+
+mysql> rollback;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> rollback;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> rollback;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select * from course;
++-----+-----------------+----------+------+
+| cid | cname           | duration | sid  |
++-----+-----------------+----------+------+
+|   1 | java full stack | 4 months |  101 |
+|   2 | java full stack | 4 months |  104 |
+|   3 | java full stack | 4 months |  103 |
+|   4 | aws             | 4 months |  105 |
+|   5 | aws             | 3 months |  106 |
+|   8 | dotnet          | 4 months |  107 |
++-----+-----------------+----------+------+
+6 rows in set (0.00 sec)
+
+mysql> savepoint del;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> delete from course where cid=8;
+Query OK, 1 row affected (0.12 sec)
+
+mysql> savepoint upd;
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> update course set cname="amazon web service"where cid=4;
+Query OK, 1 row affected (0.06 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> savepoint ins;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> insert into course(cname,duration)value('python','2 months');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from course;
++-----+--------------------+----------+------+
+| cid | cname              | duration | sid  |
++-----+--------------------+----------+------+
+|   1 | java full stack    | 4 months |  101 |
+|   2 | java full stack    | 4 months |  104 |
+|   3 | java full stack    | 4 months |  103 |
+|   4 | amazon web service | 4 months |  105 |
+|   5 | aws                | 3 months |  106 |
+|   9 | python             | 2 months | NULL |
++-----+--------------------+----------+------+
+6 rows in set (0.00 sec)
+
+mysql> rollback to upd;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select * from course;
++-----+-----------------+----------+------+
+| cid | cname           | duration | sid  |
++-----+-----------------+----------+------+
+|   1 | java full stack | 4 months |  101 |
+|   2 | java full stack | 4 months |  104 |
+|   3 | java full stack | 4 months |  103 |
+|   4 | aws             | 4 months |  105 |
+|   5 | aws             | 3 months |  106 |
++-----+-----------------+----------+------+
+5 rows in set (0.00 sec)
+
+DCL- grant and revoke;
+mysql> create user nilanjan identified by 'pass123';
+Query OK, 0 rows affected (0.42 sec)
+
+mysql> grant select,delete on student to nilanjan;
+Query OK, 0 rows affected (0.10 sec)
+
+To chk how many users you have:
+mysql> select user from mysql.user;
++------------------+
+| user             |
++------------------+
+| nilanjan         |
+| mysql.infoschema |
+| mysql.session    |
+| mysql.sys        |
+| root             |
++------------------+
+5 rows in set (0.00 sec)
+go to cmd: C:\Program Files\MySQL\MySQL Server 8.0\bin>
+then type: mysql -u nilanjan -p
+Enter password: *******
+mysql> revoke select,delete on student from nilanjan;
+Query OK, 0 rows affected (0.10 sec)
+
+add foreign key later:
+alter table course add foreign key(sid)references student(student_id);
+how to delete parent table:
+alter table course drop foreign key course_ibfk_1;
+if you use truncate you can not rollback
+if you use drop you can rollback and get the information.
